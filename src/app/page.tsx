@@ -25,6 +25,15 @@ export default function Page() {
     fetchData();
   }, []);
 
+  // const doggyTip = {
+  //   {
+  //     name: "shiba",
+  //     jpName: "柴犬",
+  //     shiba: "ツンデレない犬です、",
+  //   },
+
+  // }
+
   const handleSelectChange = async (e) => {
     const category = e.target.value;
     setSelectedVal(category);
@@ -40,13 +49,14 @@ export default function Page() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center gap-3 bg-green-100 min-h-screen">
+    <div className="flex flex-col justify-center items-center gap-3 bg-green-100 min-h-screen bg-[url('/dog.svg')] bg-repeat">
       <div className="mt-10 max-w-[30%] w-full flex flex-col gap-3">
         <p className="text-center text-lg">Choose your doggy </p>
         <select className="border p-2" onChange={handleSelectChange}>
-          {categories.map((post) => (
-            <option value={post} key={post.id}>
+          {categories.map((post, index) => (
+            <option value={post} key={index}>
               {post}
+              {index}
             </option>
           ))}
         </select>
@@ -57,13 +67,26 @@ export default function Page() {
           <Image
             src={imageUrl}
             alt={selectVal}
-            className="w-full object-cover  max-w-[18.75rem] max-h-[18.75rem]"
+            className="w-full object-cover  max-w-[18.75rem] max-h-[18.75rem] border-none"
             width={200}
             height={200}
             loading="lazy"
           />
         </div>
-        {selectVal && <p className="text-center">You like it?</p>}
+        {selectVal && (
+          <p className="text-center">
+            You like it?<button>ハート</button>
+          </p>
+        )}
+
+        {/* <Image
+          src="dog.svg"
+          alt={selectVal}
+          className="w-full object-cover  max-w-[18.75rem] max-h-[18.75rem]"
+          width={200}
+          height={200}
+          loading="lazy"
+        /> */}
       </div>
     </div>
   );
