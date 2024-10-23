@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function Page() {
-  const [categories, setCategories] = useState([]); // カテゴリーを管理するための状態
+  const [categories, setCategories] = useState<string[]>([]); // カテゴリーを管理するための状態
   const [selectVal, setSelectedVal] = useState("");
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
   useEffect(() => {
     async function fetchData() {
       try {
@@ -34,7 +34,9 @@ export default function Page() {
 
   // }
 
-  const handleSelectChange = async (e) => {
+  const handleSelectChange = async (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const category = e.target.value;
     setSelectedVal(category);
     if (category) {
@@ -56,7 +58,6 @@ export default function Page() {
           {categories.map((post, index) => (
             <option value={post} key={index}>
               {post}
-              {index}
             </option>
           ))}
         </select>
@@ -73,11 +74,7 @@ export default function Page() {
             loading="lazy"
           />
         </div>
-        {selectVal && (
-          <p className="text-center">
-            You like it?<button>ハート</button>
-          </p>
-        )}
+        {selectVal && <p className="text-center">You like it?</p>}
 
         {/* <Image
           src="dog.svg"
