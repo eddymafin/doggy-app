@@ -1,29 +1,27 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 
 export default function Page() {
   const [categories, setCategories] = useState<string[]>([]); // カテゴリーを管理するための状態
   const [selectVal, setSelectedVal] = useState("");
   const [lists, setList] = useState([]);
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch("https://dog.ceo/api/breeds/list/all");
-        if (!res.ok) {
-          throw new Error("リストの取得に失敗しました");
-        }
-        const data = await res.json();
-        // console.log(data);
-        const breeds = data.message;
-        const categoriesList = Object.keys(breeds);
-        setCategories(categoriesList);
-      } catch (error) {
-        console.error("エラーです:", error);
+  async function fetchData() {
+    try {
+      const res = await fetch("https://dog.ceo/api/breeds/list/all");
+      if (!res.ok) {
+        throw new Error("リストの取得に失敗しました");
       }
+      const data = await res.json();
+      // console.log(data);
+      const breeds = data.message;
+      const categoriesList = Object.keys(breeds);
+      setCategories(categoriesList);
+    } catch (error) {
+      console.error("エラーです:", error);
     }
-    fetchData();
-  }, []);
+  }
+  fetchData();
 
   // const doggyTip = {
   //   {
@@ -82,7 +80,7 @@ export default function Page() {
               onClick={shuffleButton}
               className="bg-green-900 text-white p-3 rounded-md w-full md:max-w-[21.875rem] mx-auto"
             >
-              Want see more pics?
+              Want to see more pics?
             </button>
           </div>
         )}
