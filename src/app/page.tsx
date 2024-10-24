@@ -1,27 +1,31 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function Page() {
   const [categories, setCategories] = useState<string[]>([]); // カテゴリーを管理するための状態
   const [selectVal, setSelectedVal] = useState("");
   const [lists, setList] = useState([]);
-  async function fetchData() {
-    try {
-      const res = await fetch("https://dog.ceo/api/breeds/list/all");
-      if (!res.ok) {
-        throw new Error("リストの取得に失敗しました");
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch("https://dog.ceo/api/breeds/list/all");
+        if (!res.ok) {
+          throw new Error("リストの取得に失敗しました");
+        }
+        const data = await res.json();
+        // console.log(data);
+        const breeds = data.message;
+        // console.log(data);
+
+        const categoriesList = Object.keys(breeds);
+        setCategories(categoriesList);
+      } catch (error) {
+        console.error("エラーです:", error);
       }
-      const data = await res.json();
-      // console.log(data);
-      const breeds = data.message;
-      const categoriesList = Object.keys(breeds);
-      setCategories(categoriesList);
-    } catch (error) {
-      console.error("エラーです:", error);
     }
-  }
-  fetchData();
+    fetchData();
+  }, []);
 
   // const doggyTip = {
   //   {
@@ -46,7 +50,7 @@ export default function Page() {
       );
       const dogData = await response.json();
       const array = dogData.message;
-      console.log(array);
+      // console.log(array);
       setList(array.slice(0, 20));
     }
   };
