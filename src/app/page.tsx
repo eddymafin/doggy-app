@@ -73,6 +73,19 @@ export default function Page() {
         <p className="text-center text-2xl font-bold mb-2">
           Your choice doggy<span className="ml-2 ">{selectVal}</span>
         </p>
+        {selectVal && (
+          <div className="flex flex-col gap-3 mt-5">
+            <p className="text-center font-bold text-lg">
+              Did you find your favorite doggy?
+            </p>
+            <button
+              onClick={shuffleButton}
+              className="bg-green-900 text-white p-3 rounded-md w-full md:max-w-[21.875rem] mx-auto"
+            >
+              Want see more pics?
+            </button>
+          </div>
+        )}
         <ul className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-4">
           {lists.map((list, index) => (
             <li
@@ -90,17 +103,6 @@ export default function Page() {
             </li>
           ))}
         </ul>
-        {selectVal && (
-          <p className="text-center font-bold text-lg">
-            Did you find your favorite doggy?
-          </p>
-        )}
-        <button
-          onClick={shuffleButton}
-          className="bg-green-900 text-white p-3 rounded-md w-full md:max-w-[21.875rem] mx-auto"
-        >
-          Want see more pics?
-        </button>
       </div>
     </div>
   );
