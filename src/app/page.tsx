@@ -6,7 +6,6 @@ export default function Page() {
   const [categories, setCategories] = useState<string[]>([]); // カテゴリーを管理するための状態
   const [selectVal, setSelectedVal] = useState("");
   const [lists, setList] = useState([]);
-  const [imageUrl, setImageUrl] = useState("");
   useEffect(() => {
     async function fetchData() {
       try {
@@ -50,15 +49,14 @@ export default function Page() {
       const dogData = await response.json();
       const array = dogData.message;
       console.log(array);
-      setImageUrl(dogData.message[0]);
       setList(array.slice(0, 20));
     }
   };
 
   // 配列をシャッフルする関数
-  const shuffleArray = () => {
-    const shuffledList = [...lists].sort(() => Math.random() - 0.5); // 配列をランダムにシャッフル
-    setList(shuffledList); // シャッフルした配列をセット
+  const shuffleButton = () => {
+    const shuffledList = [...lists].sort(() => Math.random() - 0.5);
+    setList(shuffledList);
   };
 
   return (
@@ -98,21 +96,11 @@ export default function Page() {
           </p>
         )}
         <button
-          onClick={shuffleArray}
+          onClick={shuffleButton}
           className="bg-green-900 text-white p-3 rounded-md w-full md:max-w-[21.875rem] mx-auto"
         >
           Want see more pics?
         </button>
-        {/* <div className="flex items-center justify-center overflow-hidden h-full">
-          <Image
-            src={imageUrl}
-            alt={selectVal}
-            className="w-full object-cover  md:max-w-[18.75rem] md:max-h-[18.75rem] border-none"
-            width={200}
-            height={200}
-            loading="lazy"
-          />
-        </div> */}
       </div>
     </div>
   );
