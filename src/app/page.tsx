@@ -72,8 +72,11 @@ export default function Page() {
             </option>
           ))}
         </select>
-        <p className="text-center text-2xl font-bold mb-2">
-          Your choice doggy<span className="ml-2 ">{selectVal}</span>
+        <p className="text-center text-2xl font-bold my-3">
+          Your choice doggy is..{" "}
+          <span className={`ml-2  p-3 ${selectVal ? "bg-white" : ""}`}>
+            {selectVal}
+          </span>
         </p>
         {selectVal && (
           <div className="flex flex-col gap-3 mt-5">
