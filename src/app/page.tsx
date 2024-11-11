@@ -8,24 +8,6 @@ export default function Page() {
   const [selectVal, setSelectedVal] = useState("");
   const [lists, setList] = useState([]);
   useEffect(() => {
-    // async function fetchData() {
-    //   const apiURL = "https://dog.ceo/api/breeds/list/all";
-
-    //   try {
-    //     const res = await fetch(apiURL);
-    //     if (!res.ok) {
-    //       throw new Error("リストの取得に失敗しました");
-    //     }
-    //     const data = await res.json();
-    //     console.log(data);
-    //     const breeds = data.message;
-    //     const categoriesList = Object.keys(breeds);
-    //     setCategories(categoriesList);
-    //   } catch (error) {
-    //     console.error("エラーです:", error);
-    //   }
-    // }
-
     // axiosの記述に変更
     const fetchData = async () => {
       const apiUrl = "https://dog.ceo/api/breeds/list/all";
@@ -47,15 +29,6 @@ export default function Page() {
     fetchData();
   }, []);
 
-  // const doggyTip = {
-  //   {
-  //     name: "shiba",
-  //     jpName: "柴犬",
-  //     shiba: "ツンデレない犬です、",
-  //   },
-
-  // }
-
   const handleSelectChange = async (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
@@ -73,7 +46,6 @@ export default function Page() {
         .catch((error) => {
           console.error("エラーです", error);
         });
-      // const dogData = await response.json();
       const array = dogData.message;
       setList(array.slice(0, 20));
     }
