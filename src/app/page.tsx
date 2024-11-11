@@ -53,7 +53,7 @@ export default function Page() {
       // setList(array);
 
       // 20ごとに配列を再分配
-      const paginatedArray = [];
+      const paginatedArray: string[][] = [];
       for (let i = 0; i < array.length; i += 20) {
         paginatedArray.push(array.slice(i, i + 20));
       }
@@ -128,7 +128,6 @@ export default function Page() {
               ))
             : null}
         </ul>
-        <p>{lists.length}</p>
         <ul className="flex gap-3 justify-center mt-5">
           {lists.map((listItem, index) => {
             return (
