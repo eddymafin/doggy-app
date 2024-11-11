@@ -6,7 +6,7 @@ import axios from "axios";
 export default function Page() {
   const [categories, setCategories] = useState<string[]>([]); // カテゴリーを管理するための状態
   const [selectVal, setSelectedVal] = useState("");
-  const [lists, setList] = useState<string[][]>([]);
+  const [lists, setList] = useState<Array<string[]>>([]);
   const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
@@ -34,7 +34,6 @@ export default function Page() {
   const handleSelectChange = async (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    console.log(e);
     const category = e.target.value;
     setSelectedVal(category);
     if (category) {
@@ -53,12 +52,10 @@ export default function Page() {
       // setList(array);
 
       // 20ごとに配列を再分配
-      const paginatedArray: string[][] = [];
+      const paginatedArray: Array<string[]> = [];
       for (let i = 0; i < array.length; i += 20) {
         paginatedArray.push(array.slice(i, i + 20));
       }
-      console.log(paginatedArray[0]);
-      console.log(array);
       // setList(array);
       setList(paginatedArray);
       setCurrentPage(0);
@@ -109,6 +106,23 @@ export default function Page() {
             </button> */}
           </div>
         )}
+        <ul className="flex gap-3 justify-center mt-5">
+          {lists.map((listItem, index) => {
+            return (
+              <li key={index}>
+                <button
+                  className={`${
+                    currentPage === index ? "bg-green-600" : "bg-green-900"
+                  } w-[3.125rem] h-[3.125rem] flex items-center justify-center rounded-full  text-white md:hover:bg-green-600`}
+                  value={index}
+                  onClick={changePagination}
+                >
+                  {index + 1}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
         <ul className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-4">
           {lists[currentPage]
             ? lists[currentPage].map((list, index) => (
