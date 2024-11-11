@@ -28,9 +28,9 @@ export default function Page() {
 
     // axiosの記述に変更
     const fetchData = async () => {
-      const apiURL = "https://dog.ceo/api/breeds/list/all";
+      const apiUrl = "https://dog.ceo/api/breeds/list/all";
       const result = await axios
-        .get(apiURL)
+        .get(apiUrl)
         .then((response) => {
           return response.data;
           // console.log(response.data);
@@ -40,7 +40,7 @@ export default function Page() {
         });
 
       const breeds = result.message;
-      console.log(breeds);
+      // console.log(breeds);
       const categoriesList = Object.keys(breeds);
       setCategories(categoriesList);
     };
@@ -62,15 +62,19 @@ export default function Page() {
     const category = e.target.value;
     setSelectedVal(category);
     if (category) {
-      // const response = await fetch(
-      //   `https://dog.ceo/api/breed/${category}/images/random`
-      // );
-      const response = await fetch(
-        `https://dog.ceo/api/breed/${category}/images`
-      );
-      const dogData = await response.json();
+      const categoryUrl = `https://dog.ceo/api/breed/${category}/images`;
+
+      // const response = await fetch(categoryUrl);
+      const dogData = await axios
+        .get(categoryUrl)
+        .then((response) => {
+          return response.data;
+        })
+        .catch((error) => {
+          console.error("エラーです", error);
+        });
+      // const dogData = await response.json();
       const array = dogData.message;
-      // console.log(array);
       setList(array.slice(0, 20));
     }
   };
