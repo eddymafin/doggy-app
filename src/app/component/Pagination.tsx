@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Dispatch, SetStateAction } from "react";
 
 interface Props {
@@ -27,7 +26,7 @@ export default function Pagination({ lists, currentNumber }: Props) {
   };
   return (
     <div className="grid grid-cols-[1fr,auto,1fr] gap-3 justify-center mt-5 items-center">
-      <button className={``} onClick={prevButton}>
+      <button className={`${buttonCommonClass}`} onClick={prevButton}>
         Prev
       </button>
       <ul className="flex gap-3 justify-center flex-wrap items-center">
@@ -45,7 +44,7 @@ export default function Pagination({ lists, currentNumber }: Props) {
           );
         })}
       </ul>
-      <button className={``} onClick={nextButton}>
+      <button className={`${buttonCommonClass}`} onClick={nextButton}>
         Next
       </button>
     </div>

@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import axios from "axios";
-import Pagination from "./component/Pagination";
+// import Pagination from "./component/Pagination";
 
 export default function Page() {
   const [categories, setCategories] = useState<string[]>([]); // カテゴリーを管理するための状態
