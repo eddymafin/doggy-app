@@ -75,6 +75,7 @@ export default function Page() {
         });
       // const dogData = await response.json();
       const array = dogData.message;
+      console.log(array);
       setList(array.slice(0, 20));
     }
   };
