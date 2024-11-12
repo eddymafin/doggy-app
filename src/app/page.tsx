@@ -10,7 +10,6 @@ export default function Page() {
   const [lists, setList] = useState<Array<string[]>>([]);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
-  const buttonCommonClass = `font-bold text-lg`;
 
   useEffect(() => {
     // axiosの記述に変更
